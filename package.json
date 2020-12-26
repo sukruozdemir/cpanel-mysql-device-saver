@@ -5,9 +5,9 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node ./dist/index.js",
+    "start": "node dist/index.js",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-    "prestart": "rimraf ./dist && npm run build",
+    "postinstall": "rimraf ./dist && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
