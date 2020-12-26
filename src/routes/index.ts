@@ -12,4 +12,10 @@ router.post(
   deviceController.createDevice,
 );
 
+router.post(
+  '/saveToken',
+  validate(deviceValidation.saveToken),
+  deviceController.saveToken,
+);
+
 export default router;

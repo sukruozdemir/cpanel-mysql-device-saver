@@ -45,3 +45,21 @@ export const createDevice = async (postData: any) => {
   await closeConnection();
   return { message: 'OK' };
 };
+
+export const saveDeviceToken = async (uniqueAppDeviceId: string, token: string) => {
+  const connection = await database();
+  const queryResult = await connection.execute(
+    'SELECT * FROM `devices` WHERE `uniqueAppDeviceId` = ?',
+    [uniqueAppDeviceId],
+  );
+
+  if (queryResult.length <= 0) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Device couldn't found");
+  }
+
+  const updateQuery =
+    'UPDATE `devices` SET `token = ? WHERE `uniqueAppDeviceId` = ?';
+  await connection.execute(updateQuery, [token, uniqueAppDeviceId]);
+  await closeConnection();
+  return { message: 'OK' };
+};

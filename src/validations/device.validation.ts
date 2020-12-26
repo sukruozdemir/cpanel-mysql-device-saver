@@ -26,3 +26,10 @@ export const createDevice = {
     supportedCpuArchitectures: Joi.array().allow(null),
   }),
 };
+
+export const saveToken = {
+  body: Joi.object().keys({
+    uniqueAppDeviceId: Joi.string().required(),
+    token: Joi.string().required()
+  })
+}
