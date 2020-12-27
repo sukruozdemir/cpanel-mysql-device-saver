@@ -14,7 +14,7 @@ import { ApiError } from './utils/api-error';
 const app: Application = express();
 
 app.use(morgan.successHandler);
-app.use(morgan.successHandler);
+app.use(morgan.errorHandler);
 
 app.use(responseTime());
 app.use(helmet());

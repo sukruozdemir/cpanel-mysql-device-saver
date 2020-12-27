@@ -45,6 +45,7 @@ export const closeConnection = () =>
       .then(connection => connection.end().catch(reject))
       .then(() => {
         ssh.end();
-      });
+      })
+      .catch(reject);
     resolve('Closed');
   });
