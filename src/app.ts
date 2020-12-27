@@ -5,11 +5,13 @@ import helmet from 'helmet';
 import httpStatus from 'http-status';
 import responseTime from 'response-time';
 import xss from 'xss-clean';
+import * as cron from 'node-cron';
 
 import routes from './routes';
 import * as morgan from './config/morgan';
 import { errorConverter, errorHandler } from './middlewares/error.middleware';
 import { ApiError } from './utils/api-error';
+import { deviceService } from './services';
 
 const app: Application = express();
 
@@ -36,5 +38,9 @@ app.use(errorConverter);
 
 // handle error
 app.use(errorHandler);
+
+cron.schedule('*/5 * * * *', async () => {
+  await deviceService.sendNewProductNotifications();
+});
 
 export default app;
