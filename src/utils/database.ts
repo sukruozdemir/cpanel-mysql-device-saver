@@ -27,7 +27,7 @@ export const database = (): Promise<mysql.Connection> =>
               database: config.mysql.database,
               stream,
             });
-            resolve(connection);
+            return resolve(connection);
           },
         );
       })
@@ -45,7 +45,8 @@ export const closeConnection = () =>
       .then(connection => connection.end().catch(reject))
       .then(() => {
         ssh.end();
+        ssh.destroy();
+        resolve('Closed');
       })
       .catch(reject);
-    resolve('Closed');
   });

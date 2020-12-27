@@ -30,6 +30,8 @@ const unexpectedErrorHandler = (error: any) => {
   exitHandler();
 };
 
+// Test
+process.setMaxListeners(0);
 process.on('uncaughtException', unexpectedErrorHandler);
 process.on('unhandledRejection', unexpectedErrorHandler);
 
