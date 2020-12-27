@@ -88,7 +88,7 @@ export const sendNewProductNotifications = async () => {
         to: pushToken,
         sound: 'default',
         title: 'Yeni Sipariş Geldi',
-        body: `${order[0]} - ${order[1]} TL - ${order[2]} Adet`,
+        body: `${order.product_title} - ${order.amount} TL - ${order.piece} Adet`,
       });
     });
 
