@@ -81,15 +81,26 @@ export const sendNewProductNotifications = async () => {
       continue;
     }
 
-    for (const order of orders) {
-      // Construct a message (see https://docs.expo.io/push-notifications/sending-notifications/)
+    orders.forEach(order => {
+      // tslint:disable-next-line: no-console
+      console.log({ order });
       messages.push({
         to: pushToken,
         sound: 'default',
         title: 'Yeni Sipariş Geldi',
         body: `${order[0]} - ${order[1]} TL - ${order[2]} Adet`,
       });
-    }
+    });
+
+    // for (const order of orders) {
+    //   // Construct a message (see https://docs.expo.io/push-notifications/sending-notifications/)
+    //   messages.push({
+    //     to: pushToken,
+    //     sound: 'default',
+    //     title: 'Yeni Sipariş Geldi',
+    //     body: `${order[0]} - ${order[1]} TL - ${order[2]} Adet`,
+    //   });
+    // }
   }
 
   // The Expo push notification service accepts batches of notifications so
@@ -189,7 +200,7 @@ export const sendNewProductNotifications = async () => {
   })();
 
   const updateQuery =
-    'UPDATE order SET notification_sent = TRUE WHERE notification_sent IS NULL OR notification_sent = FALSE';
+    'UPDATE `order` SET notification_sent = TRUE WHERE notification_sent IS NULL OR notification_sent = FALSE';
   await connection.query(updateQuery);
   await closeConnection();
 };
