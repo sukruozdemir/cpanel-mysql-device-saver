@@ -82,8 +82,6 @@ export const sendNewProductNotifications = async () => {
     }
 
     orders.forEach(order => {
-      // tslint:disable-next-line: no-console
-      console.log({ order });
       messages.push({
         to: pushToken,
         sound: 'default',
