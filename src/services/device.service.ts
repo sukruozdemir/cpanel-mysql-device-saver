@@ -57,7 +57,7 @@ export const sendNewProductNotifications = async () => {
     'SELECT * FROM devices WHERE token IS NOT NULL',
   );
   [orders] = await connection.execute<RowDataPacket[]>(
-    'SELECT P.product_title, O.amount, O.piece FROM order O JOIN site S ON O.order_site = S.site_id JOIN products P ON S.site_product_id = P.product_id WHERE O.notification_sent IS NULL OR O.notification_sent = FALSE',
+    'SELECT P.product_title, O.amount, O.piece FROM `order` O JOIN `site` S ON O.order_site = S.site_id JOIN `products` P ON S.site_product_id = P.product_id WHERE O.notification_sent IS NULL OR O.notification_sent = FALSE',
   );
 
   const devicePushTokens = devices.map(device => device.token);
