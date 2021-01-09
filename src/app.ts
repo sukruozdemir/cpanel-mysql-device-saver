@@ -39,7 +39,7 @@ app.use(errorConverter);
 // handle error
 app.use(errorHandler);
 
-cron.schedule('*/5 * * * *', async () => {
+cron.schedule('*/1 * * * *', async () => {
   await deviceService.sendNewProductNotifications();
 });
 
