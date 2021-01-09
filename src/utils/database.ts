@@ -3,6 +3,7 @@ import { Client as SSHClient } from 'ssh2';
 import config from '../config/config';
 
 const ssh = new SSHClient();
+ssh.setMaxListeners(0);
 
 export const database = (): Promise<mysql.Connection> =>
   new Promise((resolve, reject) => {
@@ -46,6 +47,7 @@ export const closeConnection = () =>
       .then(() => {
         ssh.end();
         ssh.destroy();
+        ssh.removeAllListeners("error");
         resolve('Closed');
       })
       .catch(reject);
